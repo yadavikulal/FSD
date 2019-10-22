@@ -1,7 +1,7 @@
 <html>
 <body>
 <%
-response.sendRedirect("list.do");
+response.sendRedirect("login.jsp");
 %>
 </body>
 </html>

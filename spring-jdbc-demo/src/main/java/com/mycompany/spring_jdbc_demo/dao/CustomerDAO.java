@@ -7,6 +7,8 @@ import com.mycompany.spring_jdbc_demo.model.Customer;
 public interface CustomerDAO {
 	
 	public void createCustomer(Customer customer);
-	public List<Customer> retrieveCustomer();
+	public List<Customer> getAllCustomer();
+	public void deleteCustomer();
+	public void updateCustomer(Customer customer);
 
 }

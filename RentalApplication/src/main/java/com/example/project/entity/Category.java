@@ -31,17 +31,17 @@ public class Category {
 	@JoinColumn(name = "category_id")
 	private List<Products> products;
 
-	public Category(Long categoryId, String categoryType, List<Products> products) {
+	public Category() {
+		super();
+	}
+	
+	public Category(Long categoryId, @NotNull String categoryType, List<Products> products) {
 		super();
 		this.categoryId = categoryId;
 		this.categoryType = categoryType;
 		this.products = products;
 	}
 
-	public Category() {
-		super();
-	}
-	
 	public Long getCategoryId() {
 		return categoryId;
 	}

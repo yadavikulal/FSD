@@ -5,10 +5,12 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -16,47 +18,48 @@ import javax.validation.constraints.NotNull;
 @Table(name = "orders")
 public class Orders {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="orders_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "orders_id")
 	private Long orderId;
-	
+
 	@NotNull
-	@Column(name="orders_datetime")
+	@Column(name = "orders_datetime")
 	private Date ordersDatetime;
-	
+
 	@NotNull
-	@Column(name="orders_cost")
+	@Column(name = "orders_cost")
 	private double ordersCost;
-	
+
 	@NotNull
-	@Column(name="orders_quantity")
+	@Column(name = "orders_quantity")
 	private int ordersQuantity;
-	
+
 	@NotNull
-	@Column(name="orders_totalcost")
+	@Column(name = "orders_totalcost")
 	private double ordersTotalcost;
 	
 	@NotNull
-	@Column(name="person_id")
-	private Long personId;
+	@Column(name = "person_role_id")
+	private double personRoleId;
 	
-	 @ManyToMany(mappedBy = "orders")
-	 List<Products> products;
-	 
-	 public Orders() {
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name="orders_id")
+	private List<ProductOrders> productOrders;
+
+	public Orders() {
 		super();
 	}
 
-	public Orders(Long orderId, Date ordersDatetime, double ordersCost, int ordersQuantity, double ordersTotalcost,
-			Long personId, List<Products> products) {
+	public Orders(Long orderId, @NotNull Date ordersDatetime, @NotNull double ordersCost, @NotNull int ordersQuantity,
+			@NotNull double ordersTotalcost, @NotNull double personRoleId, List<ProductOrders> productOrders) {
 		super();
 		this.orderId = orderId;
 		this.ordersDatetime = ordersDatetime;
 		this.ordersCost = ordersCost;
 		this.ordersQuantity = ordersQuantity;
 		this.ordersTotalcost = ordersTotalcost;
-		this.personId = personId;
-		this.products = products;
+		this.personRoleId = personRoleId;
+		this.productOrders = productOrders;
 	}
 
 	public Long getOrderId() {
@@ -99,20 +102,20 @@ public class Orders {
 		this.ordersTotalcost = ordersTotalcost;
 	}
 
-	public Long getPersonId() {
-		return personId;
+	public double getPersonRoleId() {
+		return personRoleId;
 	}
 
-	public void setPersonId(Long personId) {
-		this.personId = personId;
+	public void setPersonRoleId(double personRoleId) {
+		this.personRoleId = personRoleId;
 	}
 
-	public List<Products> getProducts() {
-		return products;
+	public List<ProductOrders> getProductOrders() {
+		return productOrders;
 	}
 
-	public void setProducts(List<Products> products) {
-		this.products = products;
+	public void setProductOrders(List<ProductOrders> productOrders) {
+		this.productOrders = productOrders;
 	}
-	 	
+	
 }

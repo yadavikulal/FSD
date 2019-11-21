@@ -1,15 +1,15 @@
 package com.example.project.entity;
-
 import java.sql.Blob;
 import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -38,41 +38,38 @@ public class Products {
 	private double productPrice;
 	
 	@NotNull
-	@Column(name="product_features")
-	private Blob productFeatures;
+	@Column(name="product_images")
+	private Blob productImages;
 	
 	@NotNull
-	@Column(name="person_id")
-	private Long personId;
+	@Column(name="person_role_id")
+	private Long personRoleId;
 	
 	@NotNull
 	@Column(name = "category_id")
 	private Long categoryId;
 	
-	@ManyToMany
-	@JoinTable(
-	  name = "product_orders", 
-	  joinColumns = @JoinColumn(name = "product_id"), 
-	  inverseJoinColumns = @JoinColumn(name = "order_id"))
-	List<Orders> orders;
-
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name="product_id")
+	private List<ProductOrders> productOrders;
+	
 	public Products() {
 		super();
 	}
 
 	public Products(Long productId, String productName, int productQuantity, String productDescription,
-			double productPrice, Blob productFeatures, Long personId, Long categoryId, List<Orders> orders) {
+			double productPrice, Blob productImages, Long personRoleId, Long categoryId) {
 		super();
 		this.productId = productId;
 		this.productName = productName;
 		this.productQuantity = productQuantity;
 		this.productDescription = productDescription;
 		this.productPrice = productPrice;
-		this.productFeatures = productFeatures;
-		this.personId = personId;
+		this.productImages = productImages;
+		this.personRoleId = personRoleId;
 		this.categoryId = categoryId;
-		this.orders = orders;
 	}
+	
 
 	public Long getCategoryId() {
 		return categoryId;
@@ -122,28 +119,19 @@ public class Products {
 		this.productPrice = productPrice;
 	}
 
-	public Blob getProductFeatures() {
-		return productFeatures;
+	public Blob getProductImages() {
+		return productImages;
 	}
 
-	public void setProductFeatures(Blob productFeatures) {
-		this.productFeatures = productFeatures;
+	public void setProductImages(Blob productImages) {
+		this.productImages = productImages;
 	}
 
 	public Long getPersonId() {
-		return personId;
+		return personRoleId;
 	}
 
-	public void setPersonId(Long personId) {
-		this.personId = personId;
+	public void setPersonId(Long personRoleId) {
+		this.personRoleId = personRoleId;
 	}
-
-	public List<Orders> getOrders() {
-		return orders;
-	}
-
-	public void setOrders(List<Orders> orders) {
-		this.orders = orders;
-	}
-	
 }

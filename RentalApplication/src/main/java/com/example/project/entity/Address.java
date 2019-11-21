@@ -42,15 +42,15 @@ public class Address {
 	private long pincode;
 
 	@NotNull
-	@Column(name="person_id")
-	private Long personId;
+	@Column(name="person_role_id")
+	private Long personRoleId;
 	
 	public Address() {
 		super();
 	}
 
-	public Address(Long addressId, int doorNo, String area, String village, String city, String state, long pincode,
-			Long personId) {
+	public Address(Long addressId, @NotNull int doorNo, @NotNull String area, @NotNull String village,
+			@NotNull String city, @NotNull String state, @NotNull long pincode, @NotNull Long personRoleId) {
 		super();
 		this.addressId = addressId;
 		this.doorNo = doorNo;
@@ -59,7 +59,7 @@ public class Address {
 		this.city = city;
 		this.state = state;
 		this.pincode = pincode;
-		this.personId = personId;
+		this.personRoleId = personRoleId;
 	}
 
 	public Long getAddressId() {
@@ -118,12 +118,12 @@ public class Address {
 		this.pincode = pincode;
 	}
 
-	public Long getPersonId() {
-		return personId;
+	public Long getPersonRoleId() {
+		return personRoleId;
 	}
 
-	public void setPersonId(Long personId) {
-		this.personId = personId;
+	public void setPersonRoleId(Long personRoleId) {
+		this.personRoleId = personRoleId;
 	}
-	
+
 }
